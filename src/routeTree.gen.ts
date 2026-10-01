@@ -10,11 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DreRouteImport } from './routes/dre'
+import { Route as LancamentosRouteImport } from './routes/lancamentos'
+import { Route as PlanejamentoRouteImport } from './routes/planejamento'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriasRoute = CategoriasRouteImport.update({
+  id: '/categorias',
+  path: '/categorias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -22,31 +31,81 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DreRoute = DreRouteImport.update({
+  id: '/dre',
+  path: '/dre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LancamentosRoute = LancamentosRouteImport.update({
+  id: '/lancamentos',
+  path: '/lancamentos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanejamentoRoute = PlanejamentoRouteImport.update({
+  id: '/planejamento',
+  path: '/planejamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/categorias': typeof CategoriasRoute
   '/dashboard': typeof DashboardRoute
+  '/dre': typeof DreRoute
+  '/lancamentos': typeof LancamentosRoute
+  '/planejamento': typeof PlanejamentoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/categorias': typeof CategoriasRoute
   '/dashboard': typeof DashboardRoute
+  '/dre': typeof DreRoute
+  '/lancamentos': typeof LancamentosRoute
+  '/planejamento': typeof PlanejamentoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/categorias': typeof CategoriasRoute
   '/dashboard': typeof DashboardRoute
+  '/dre': typeof DreRoute
+  '/lancamentos': typeof LancamentosRoute
+  '/planejamento': typeof PlanejamentoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/categorias'
+    | '/dashboard'
+    | '/dre'
+    | '/lancamentos'
+    | '/planejamento'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard'
+  to:
+    | '/'
+    | '/categorias'
+    | '/dashboard'
+    | '/dre'
+    | '/lancamentos'
+    | '/planejamento'
+  id:
+    | '__root__'
+    | '/'
+    | '/categorias'
+    | '/dashboard'
+    | '/dre'
+    | '/lancamentos'
+    | '/planejamento'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategoriasRoute: typeof CategoriasRoute
   DashboardRoute: typeof DashboardRoute
+  DreRoute: typeof DreRoute
+  LancamentosRoute: typeof LancamentosRoute
+  PlanejamentoRoute: typeof PlanejamentoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/categorias': {
+      id: '/categorias'
+      path: '/categorias'
+      fullPath: '/categorias'
+      preLoaderRoute: typeof CategoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -65,12 +131,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dre': {
+      id: '/dre'
+      path: '/dre'
+      fullPath: '/dre'
+      preLoaderRoute: typeof DreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lancamentos': {
+      id: '/lancamentos'
+      path: '/lancamentos'
+      fullPath: '/lancamentos'
+      preLoaderRoute: typeof LancamentosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planejamento': {
+      id: '/planejamento'
+      path: '/planejamento'
+      fullPath: '/planejamento'
+      preLoaderRoute: typeof PlanejamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategoriasRoute: CategoriasRoute,
   DashboardRoute: DashboardRoute,
+  DreRoute: DreRoute,
+  LancamentosRoute: LancamentosRoute,
+  PlanejamentoRoute: PlanejamentoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
